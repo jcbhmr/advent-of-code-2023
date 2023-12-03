@@ -1,8 +1,0 @@
-<a href="https://adventofcode.com/2023/day/1">https://adventofcode.com/2023/day/1</a>
-<script type=module>
-const response = await fetch("https://adventofcode.com/2023/day/1/input")
-const input = await response.text()
-const answer = input.trimEnd().replaceAll(/^.*?(?:(\d).*(\d)|(\d)).*?$|/gm, "$1$2$3$3").split(/\r?\n/g).map(x => parseInt(x)).reduce((a, x) => a + x)
-pre.append(answer)
-</script>
-<pre id=pre></pre>
