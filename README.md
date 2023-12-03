@@ -1,3 +1,5 @@
+https://jcbhmr.me/advent-of-code-2023
+
 https://adventofcode.com/2023
 
 - [1.html](1.html)
