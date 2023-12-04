@@ -1,22 +1,17 @@
-export default (input) => {
-    input = input.trimEnd()
-    const lines = input.split(/\r?\n/g)
-    let sum = 0;
-    for (const line of lines) {
-        let firstDigit = line.match(/^.*?(\d)/)[1]
-        let lastDigit = line.match(/(\d).*?$/)[1]
-        console.log(line, firstDigit, lastDigit)
-        const twoDigit = +`${firstDigit}${lastDigit}`
-        sum += twoDigit
-    }
-    return sum
+export default function solution(input) {
+  return input.trimEnd()
+    .replaceAll(/^.*?(?:(\d).*(\d)|(\d)).*?$|/gm, "$1$2$3$3")
+    .split(/\r?\n/g)
+    .map(x => parseInt(x))
+    .reduce((a, x) => a + x)
 }
 
 export function part2(input) {
     input = input.trimEnd()
     const lines = input.split(/\r?\n/g)
     let sum = 0;
-    const alias = {
+    const aliasMap = {
+        __proto__: null,
         one: "1",
         two: "2",
         three: "3",
@@ -29,9 +24,9 @@ export function part2(input) {
     }
     for (const line of lines) {
         let firstDigit = line.match(/^.*?(one|two|three|four|five|six|seven|eight|nine|\d)/)[1]
-        firstDigit = alias[firstDigit] ?? +firstDigit
-        let lastDigit = line.match(/(one|two|three|four|five|six|seven|eight|nine|\d).*?$/)[1]
-        lastDigit = alias[lastDigit] ?? +lastDigit
+        firstDigit = aliasMap[firstDigit] ?? +firstDigit
+        let lastDigit = line.match(/.*(one|two|three|four|five|six|seven|eight|nine|\d).*?$/)[1]
+        lastDigit = aliasMap[lastDigit] ?? +lastDigit
         const twoDigit = +`${firstDigit}${lastDigit}`
         sum += twoDigit
     }

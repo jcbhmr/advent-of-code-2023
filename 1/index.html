@@ -1,3 +1,6 @@
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/water.css">
+<p><a href="../">Back to index</a></p>
+
 <h2>--- Day 1: Trebuchet?! ---</h2>
 
 <p>Something is wrong with global snow production, and you&#39;ve been selected to take a look. The Elves have even given you a map; on it, they&#39;ve used stars to mark the top fifty locations that are likely to be having problems.</p>
@@ -25,7 +28,7 @@ treb7uchet
 
 <p>Consider your entire calibration document.&nbsp;<em>What is the sum of all of the calibration values?</em></p>
 
-<p><mark>Solution: <code><output id="solutionanswer"></output></code></mark></p>
+<p><mark>Solution: <output id="solutionanswer"></p>
 <script type="module">
 import solution from "./solution.js"
 const response = await fetch("input.txt")
@@ -53,7 +56,7 @@ zoneight234
 
 <p><em>What is the sum of all of the calibration values?</em></p>
 
-<p><mark>Part 2: <code><output id="part2answer"></output></code></mark></p>
+<p><mark>Part 2: <output id="part2answer"></p>
 <script type="module">
 import { part2 } from "./solution.js"
 const response = await fetch("input.txt")
@@ -61,14 +64,18 @@ const input = await response.text()
 part2answer.value = JSON.stringify(part2(input))
 </script>
 
+<p><a href="https://github.com/jcbhmr/advent-of-code-2023/tree/main/1">Code</a></p>
+
+<p><mark><a href="input.txt">Get puzzle input</a></p>
 <pre id="log"></pre>
 <script>
-    consoleLog = console.log
-    console.log = (...a) => {
-        consoleLog(...a)
-        log.append(a.map(x => JSON.stringify(x)).join(" "), "\n")
-    }
-    globalThis.addEventListener("error", event => {
-        log.append(event.error, "\n")
-    })
+const consoleLog = console.log
+console.log = (...a) => {
+    consoleLog(...a)
+    log.append(a.map(x => JSON.stringify(x)).join(" "), "\n")
+}
+globalThis.addEventListener("error", event => {
+    log.append(event.error, "\n")
+})
 </script>
+<p><a href="https://adventofcode.com/2023/day/1">https://adventofcode.com/2023/day/1</a></p>

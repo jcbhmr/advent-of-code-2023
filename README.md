@@ -1,7 +1,7 @@
-view live: <https://jcbhmr.me/advent-of-code-2023> \
-view code: <https://github.com/jcbhmr/advent-of-code-2023> \
-from <https://adventofcode.com/2023>
+<div align="center">
 
-- [1.md](1.md)
-- [2.md](2.md)
-- [3.md](3.md)
+**You're probably looking for [jcbhmr.me/advent-of-code-2023]**
+
+</div>
+
+[jcbhmr.me/advent-of-code-2023]: https://jcbhmr.me/advent-of-code-2023/
