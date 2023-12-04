@@ -1,6 +1,6 @@
 <pre id="log"></pre>
 <script type="module">
-const input2 = input.textContent.trimEnd()
+const input2 = input.textContent.trim()
 
 const solution = input2.replaceAll(/^.*?(?:(\d).*(\d)|(\d)).*?$|/gm, "$1$2$3$3")
   .split(/\r?\n/g)
@@ -33,7 +33,8 @@ for (const line of lines) {
 log.append(`part 2: ${sum}\n`)
 </script>
 
-<plaintext hidden id="input" />9dlvndqbddghpxc
+<plaintext hidden id="input" />
+9dlvndqbddghpxc
 rtkrbtthree8sixfoureight6
 fdxrqmfxdkstpmcj7lmphgsmqqnmjrtwo3tcbc
 onetjcsmgk57nvmkvcvkdtqtsksgpchsfsjzkkmb
