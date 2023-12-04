@@ -1,4 +1,47 @@
-............830..743.......59..955.......663..........................................367...........895....899...............826...220......
+<pre id="log"></pre>
+<script type="module">
+const input2 = input.textContent.trimEnd()
+let sum = 0;
+const lines = input2.split(/\r?\n/g)
+for (const [i, line] of lines.entries()) {
+  let digits = ""
+  let touching = false
+  for (const [j, char] of Array.prototype.entries.call(line)) {
+    if (/\d/.test(char)) {
+      digits += char
+      const lineAbove = lines[i - 1]
+      const lineBelow = lines[i + 1]
+      const surroundings = [
+        lineAbove?.[j - 1] ?? ".",
+        lineAbove?.[j] ?? ".",
+        lineAbove?.[j + 1] ?? ".",
+        line[j - 1] ?? ".",
+        line[j + 1] ?? ".",
+        lineBelow?.[j - 1] ?? ".",
+        lineBelow?.[j] ?? ".",
+        lineBelow?.[j + 1] ?? ".",
+      ]
+      console.log(surroundings)
+      if (surroundings.some(x => /[^\d.]/.test(x))) {
+        touching = true
+      }
+    } else {
+      if (touching) {
+        sum += +digits
+      }
+
+      digits = ""
+      touching = false
+    }
+  }
+  if (touching) {
+    sum += +digits
+  }
+}
+log.append(`solution: ${sum}\n`)
+</script>
+
+<plaintext hidden id="input" />............830..743.......59..955.......663..........................................367...........895....899...............826...220......
 .......284.....*............*.....$...+.....*...377..................*.......419.............488...*.......*...................*..-....939..
 ....%.........976..679.461.7..........350..33.........$.380...$...151.897..........295..#......*....105.....418.............481........&....
 ...992.....#......=...../........701................508...*..578........................259...331.................795..945........79........
