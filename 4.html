@@ -41,6 +41,14 @@ console.log(scores)
 
 const total = scores.reduce((a, x) => a + x)
 log.append(`solution: ${total}\n`)
+
+for (const card of cards) {
+    const matches = card.numbersYouHave.filter(n => card.winningNumbers.includes(n)).length
+    for (let i = 0; i < matches; i++) {
+        cards.push(cards[card.id + i])
+    }
+}
+log.append(`part 2: ${cards.length}\n`)
 </script>
 
 <plaintext hidden id="input" />
