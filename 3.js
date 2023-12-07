@@ -1,83 +1,5 @@
-<pre id="log"></pre>
-<script type="module">
-const input2 = input.textContent.trim()
-let sum = 0;
-const lines = input2.split(/\r?\n/g)
-for (const [i, line] of lines.entries()) {
-  let digits = ""
-  let touching = false
-  for (const [j, char] of Array.prototype.entries.call(line)) {
-    if (/\d/.test(char)) {
-      digits += char
-      const lineAbove = lines[i - 1]
-      const lineBelow = lines[i + 1]
-      const surroundings = [
-        lineAbove?.[j - 1] ?? ".",
-        lineAbove?.[j] ?? ".",
-        lineAbove?.[j + 1] ?? ".",
-        line[j - 1] ?? ".",
-        line[j + 1] ?? ".",
-        lineBelow?.[j - 1] ?? ".",
-        lineBelow?.[j] ?? ".",
-        lineBelow?.[j + 1] ?? ".",
-      ]
-      if (surroundings.some(x => /[^\d.]/.test(x))) {
-        touching = true
-      }
-    } else {
-      if (touching) {
-        sum += +digits
-      }
-
-      digits = ""
-      touching = false
-    }
-  }
-  if (touching) {
-    sum += +digits
-  }
-}
-log.append(`solution: ${sum}\n`)
-
-const restOfNumber = (i, j) => {
-  const line = lines[i]
-  let left = j
-  let right = j
-  while (/\d/.test(line[left])) left--;
-  left++;
-  while (/\d/.test(line[right])) right++;
-  return line.slice(left, right)
-}
-let part2 = 0
-for (const [i, line] of lines.entries()) {
-  for (const [j, char] of Array.prototype.entries.call(line)) {
-    if (char === "*") {
-      const surroundingCoords = [
-        [i - 1, j - 1],
-        [i - 1, j],
-        [i - 1, j + 1],
-        [i, j - 1],
-        [i, j + 1],
-        [i + 1, j - 1],
-        [i + 1, j],
-        [i + 1, j + 1],
-      ].filter(([i, j]) => lines[i]?.[j])
-      let surroundingNumbers = surroundingCoords
-        .map(([i, j]) => restOfNumber(i, j))
-        .filter(x => x)
-      surroundingNumbers = [...new Set(surroundingNumbers)]
-      console.log([i, j], "had", surroundingNumbers)
-      if (surroundingNumbers.length === 2) {
-        const gearRatio = surroundingNumbers[0] * surroundingNumbers[1]
-        part2 += gearRatio
-      }
-    }
-  }
-}
-log.append(`part 2: ${part2}\n`)
-</script>
-
-<plaintext hidden id="input" />
+// Use ">" collapse
+let input = `\
 ............830..743.......59..955.......663..........................................367...........895....899...............826...220......
 .......284.....*............*.....$...+.....*...377..................*.......419.............488...*.......*...................*..-....939..
 ....%.........976..679.461.7..........350..33.........$.380...$...151.897..........295..#......*....105.....418.............481........&....
@@ -218,3 +140,80 @@ log.append(`part 2: ${part2}\n`)
 .......233................590.553..............198=..450.........661.......*.....................15...-....................-575.............
 ...........919*.....................................*.......234.........492..%...........300...........301........./866..........*..........
 ...............470.....440.874...116....240........299......................27......409.......................................639.136.......
+`
+input = input.trim()
+
+let sum = 0;
+const lines = input.split(/\r?\n/g)
+for (const [i, line] of lines.entries()) {
+  let digits = ""
+  let touching = false
+  for (const [j, char] of Array.prototype.entries.call(line)) {
+    if (/\d/.test(char)) {
+      digits += char
+      const lineAbove = lines[i - 1]
+      const lineBelow = lines[i + 1]
+      const surroundings = [
+        lineAbove?.[j - 1] ?? ".",
+        lineAbove?.[j] ?? ".",
+        lineAbove?.[j + 1] ?? ".",
+        line[j - 1] ?? ".",
+        line[j + 1] ?? ".",
+        lineBelow?.[j - 1] ?? ".",
+        lineBelow?.[j] ?? ".",
+        lineBelow?.[j + 1] ?? ".",
+      ]
+      if (surroundings.some(x => /[^\d.]/.test(x))) {
+        touching = true
+      }
+    } else {
+      if (touching) {
+        sum += +digits
+      }
+
+      digits = ""
+      touching = false
+    }
+  }
+  if (touching) {
+    sum += +digits
+  }
+}
+console.log("solution:", sum)
+
+const restOfNumber = (i, j) => {
+  const line = lines[i]
+  let left = j
+  let right = j
+  while (/\d/.test(line[left])) left--;
+  left++;
+  while (/\d/.test(line[right])) right++;
+  return line.slice(left, right)
+}
+let part2 = 0
+for (const [i, line] of lines.entries()) {
+  for (const [j, char] of Array.prototype.entries.call(line)) {
+    if (char === "*") {
+      const surroundingCoords = [
+        [i - 1, j - 1],
+        [i - 1, j],
+        [i - 1, j + 1],
+        [i, j - 1],
+        [i, j + 1],
+        [i + 1, j - 1],
+        [i + 1, j],
+        [i + 1, j + 1],
+      ].filter(([i, j]) => lines[i]?.[j])
+      let surroundingNumbers = surroundingCoords
+        .map(([i, j]) => restOfNumber(i, j))
+        .filter(x => x)
+      surroundingNumbers = [...new Set(surroundingNumbers)]
+      // console.log([i, j], "had", surroundingNumbers)
+      if (surroundingNumbers.length === 2) {
+        const gearRatio = surroundingNumbers[0] * surroundingNumbers[1]
+        part2 += gearRatio
+      }
+    }
+  }
+}
+console.log("part 2:", part2)

@@ -1,49 +1,5 @@
-<pre id="log"></pre>
-<script type="module">
-const input2 = input.textContent.trim()
-const lines = input2.split(/\r?\n/g)
-let sum = 0
-let part2 = 0
-for (const line of lines) {
-    const gameNumber = +line.match(/^Game (\d+):/)[1]
-    const shows = line.split(": ")[1].split("; ")
-    let valid = true
-    let minRed = 0
-    let minGreen = 0
-    let minBlue = 0
-    for (const show of shows) {
-        for (const seen of show.split(", ")) {
-            const pair = seen.split(" ")
-            const count = +pair[0]
-            const color = pair[1]
-            if (color === "red" && count > 12) {
-                valid = false
-            } else if (color === "green" && count > 13) {
-                valid = false
-            } else if (color === "blue" && count > 14) {
-                valid = false
-            }
-
-            if (color === "red") {
-                minRed = Math.max(minRed, count)
-            } else if (color === "green") {
-                minGreen = Math.max(minGreen, count)
-            } else if (color === "blue") {
-                minBlue = Math.max(minBlue, count)
-            }
-        }
-    }
-    if (valid) {
-        sum += gameNumber
-    }
-    const power = minRed * minGreen * minBlue
-    part2 += power
-}
-log.append(`solution: ${sum}\n`)
-log.append(`part 2: ${part2}\n`)
-</script>
-
-<plaintext hidden id="input" />
+// Use ">" collapse
+let input = `\
 Game 1: 10 red, 7 green, 3 blue; 5 blue, 3 red, 10 green; 4 blue, 14 green, 7 red; 1 red, 11 green; 6 blue, 17 green, 15 red; 18 green, 7 red, 5 blue
 Game 2: 13 green, 10 red; 11 green, 1 blue, 7 red; 5 red, 12 green, 1 blue; 12 green, 6 red; 8 green, 5 red; 12 green, 1 red
 Game 3: 7 green, 1 blue; 1 blue, 3 green, 1 red; 1 green, 1 blue; 2 green; 1 blue, 7 green, 2 red; 2 green
@@ -144,3 +100,46 @@ Game 97: 4 red, 1 blue, 2 green; 2 green, 11 red, 1 blue; 8 red, 1 green; 7 red,
 Game 98: 6 green, 4 blue, 12 red; 3 blue, 13 red, 1 green; 2 blue, 12 green, 2 red; 13 green, 2 red, 1 blue; 10 red, 7 green, 1 blue
 Game 99: 6 blue, 3 green, 5 red; 3 green, 6 red, 8 blue; 3 green, 11 blue, 14 red; 14 red, 5 green, 1 blue
 Game 100: 16 red, 3 blue; 2 red, 5 green; 9 red; 1 blue, 3 green, 10 red; 1 red, 5 blue, 3 green; 12 blue, 9 red
+`
+input = input.trim()
+
+const lines = input.split(/\r?\n/g)
+let sum = 0
+let part2 = 0
+for (const line of lines) {
+    const gameNumber = +line.match(/^Game (\d+):/)[1]
+    const shows = line.split(": ")[1].split("; ")
+    let valid = true
+    let minRed = 0
+    let minGreen = 0
+    let minBlue = 0
+    for (const show of shows) {
+        for (const seen of show.split(", ")) {
+            const pair = seen.split(" ")
+            const count = +pair[0]
+            const color = pair[1]
+            if (color === "red" && count > 12) {
+                valid = false
+            } else if (color === "green" && count > 13) {
+                valid = false
+            } else if (color === "blue" && count > 14) {
+                valid = false
+            }
+
+            if (color === "red") {
+                minRed = Math.max(minRed, count)
+            } else if (color === "green") {
+                minGreen = Math.max(minGreen, count)
+            } else if (color === "blue") {
+                minBlue = Math.max(minBlue, count)
+            }
+        }
+    }
+    if (valid) {
+        sum += gameNumber
+    }
+    const power = minRed * minGreen * minBlue
+    part2 += power
+}
+console.log("solution:", sum)
+console.log("part 2:", part2)

@@ -1,57 +1,5 @@
-<pre id="log"></pre>
-<script type="module">
-const input2 = input.textContent.trim()
-// const input2 = `\
-// Card 1: 41 48 83 86 17 | 83 86  6 31 17  9 48 53
-// Card 2: 13 32 20 16 61 | 61 30 68 82 17 32 24 19
-// Card 3:  1 21 53 59 44 | 69 82 63 72 16 21 14  1
-// Card 4: 41 92 73 84 69 | 59 84 76 51 58  5 54 83
-// Card 5: 87 83 26 28 32 | 88 30 70 12 93 22 82 36
-// Card 6: 31 18 13 56 72 | 74 77 10 23 35 67 36 11
-// `.trim()
-// should be 13
-
-function parseCard(line) {
-    const id = +line.match(/^Card\s+(\d+): /)[1]
-    line = line.replace(/^Card\s+\d+: /, "")
-    const pair = line.split(/\s*\|\s*/)
-    const winningNumbers = pair[0].split(/\s+/g).map(x => +x)
-    const numbersYouHave = pair[1].split(/\s+/g).map(x => +x)
-    return { id, winningNumbers, numbersYouHave }
-}
-const lines = input2.split(/\r?\n/g)
-const cards = lines.map(x => parseCard(x))
-
-const computeScore = (card) => {
-    let score = 0
-    for (const n of card.numbersYouHave) {
-        if (card.winningNumbers.includes(n)) {
-            if (score === 0) {
-                score = 1
-            } else {
-                score *= 2
-            }
-        }
-    }
-    return score
-}
-
-const scores = cards.map(x => computeScore(x))
-console.log(scores)
-
-const total = scores.reduce((a, x) => a + x)
-log.append(`solution: ${total}\n`)
-
-for (const card of cards) {
-    const matches = card.numbersYouHave.filter(n => card.winningNumbers.includes(n)).length
-    for (let i = 0; i < matches; i++) {
-        cards.push(cards[card.id + i])
-    }
-}
-log.append(`part 2: ${cards.length}\n`)
-</script>
-
-<plaintext hidden id="input" />
+// Use ">" collapse
+let input = `\
 Card   1: 79 93 21 74 81 76 17 89  3  5 |  5 67 87 81 76 35 79 21 15 80  8 74 99 28  3 23 19 42 89 16 22 77 92 70 34
 Card   2: 83 16 24 23 59 70 14 57 74 53 | 79 82 70 23 61 14 74 57 36 37 59 72 83 16  3  2 28 63 50 60 38 86 97 24 53
 Card   3: 12 77 13 14 48 55 69  4 18 81 | 69  7 94 88 18 73 55 48 49 81 14 21 12 15  5 27 22 84 51 52 13 77  4 57 17
@@ -270,3 +218,54 @@ Card 215: 67 60 86 35 17 62 55 27 54 70 |  9 26 45 56 43 72  1 32 25 88  5 87 73
 Card 216: 18 71  4 89 17 31 63 28 25 20 | 67 97  6 76  3 95 30 75 99 26 27 32 21 73 86 31 59 98 85  1 54 93 94 69 66
 Card 217: 54 65 75 13 46  8 37 25 95 82 | 57 14 83 33 69 47 68 64  4 21 17 92  2 48 30 70 62 50 36  7 72 66 41 85 97
 Card 218: 68 97 66 41 88 16 65 31 23 63 | 29 67 55 64 91  4 12 83  1 40 74 94 58 81 98 82 78 70 26 34 96 14 36 50 56
+`
+input = input.trim()
+
+// const input = `\
+// Card 1: 41 48 83 86 17 | 83 86  6 31 17  9 48 53
+// Card 2: 13 32 20 16 61 | 61 30 68 82 17 32 24 19
+// Card 3:  1 21 53 59 44 | 69 82 63 72 16 21 14  1
+// Card 4: 41 92 73 84 69 | 59 84 76 51 58  5 54 83
+// Card 5: 87 83 26 28 32 | 88 30 70 12 93 22 82 36
+// Card 6: 31 18 13 56 72 | 74 77 10 23 35 67 36 11
+// `.trim()
+// should be 13
+
+function parseCard(line) {
+    const id = +line.match(/^Card\s+(\d+): /)[1]
+    line = line.replace(/^Card\s+\d+: /, "")
+    const pair = line.split(/\s*\|\s*/)
+    const winningNumbers = pair[0].split(/\s+/g).map(x => +x)
+    const numbersYouHave = pair[1].split(/\s+/g).map(x => +x)
+    return { id, winningNumbers, numbersYouHave }
+}
+const lines = input.split(/\r?\n/g)
+const cards = lines.map(x => parseCard(x))
+
+const computeScore = (card) => {
+    let score = 0
+    for (const n of card.numbersYouHave) {
+        if (card.winningNumbers.includes(n)) {
+            if (score === 0) {
+                score = 1
+            } else {
+                score *= 2
+            }
+        }
+    }
+    return score
+}
+
+const scores = cards.map(x => computeScore(x))
+// console.log(scores)
+
+const total = scores.reduce((a, x) => a + x)
+console.log("solution:", total)
+
+for (const card of cards) {
+    const matches = card.numbersYouHave.filter(n => card.winningNumbers.includes(n)).length
+    for (let i = 0; i < matches; i++) {
+        cards.push(cards[card.id + i])
+    }
+}
+console.log("part 2:", cards.length)
