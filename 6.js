@@ -32,7 +32,7 @@ console.log("solution:", n)
 const lines = input.split(/\r?\n/g)
 const time = lines[0].replace(/\s+/g, "").split(":")[1]
 const record = lines[1].replace(/\s+/g, "").split(":")[1]
-console.table({time,record})
+// console.table({time,record})
 let beat = 0
 for (let held = 0; held <= time; held++) {
     const t = time - held;
