@@ -1,3 +1,6 @@
+// couldnt figure this one out. this is code from
+// https://github.com/JoanaBLate/advent-of-code-js/blob/main/2023/day16/solve1.js
+
 const NORTH = 1
 const SOUTH = 2
 const WEST  = 3
