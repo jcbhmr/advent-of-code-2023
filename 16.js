@@ -1,7 +1,3 @@
-"use strict"
-
-// solving the puzzle takes (my computer) 0.028s
-
 const NORTH = 1
 const SOUTH = 2
 const WEST  = 3
